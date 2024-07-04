@@ -12,6 +12,10 @@ function App() {
 
   const addNote = (event) => {   
     event.preventDefault()
+    if (newName && persons.findIndex(p =>p.name.toLowerCase() === newName.toLowerCase()) !== -1){
+      alert(`${newName} is already added to phonebook`)
+      return
+    }
     const personObject = {
       name: newName
     }
