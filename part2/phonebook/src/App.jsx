@@ -2,10 +2,15 @@ import { useState } from 'react'
 
 function App() {
   const [persons, setPersons] = useState([
-    {name: 'Arto Hellas', number: '123456789'}
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [searchString, setSearchString] = useState('')
+  let notesToShow = [...persons];
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -13,6 +18,17 @@ function App() {
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value)
   }
+
+  const handleFilterChange= (event) => {
+   const newSearch = event.target.value;
+   
+
+ 
+    setSearchString(newSearch)
+  }
+  const personsToShow = searchString.length === 0 
+  ? persons
+  : persons.filter(x=> x.name.toLowerCase().includes(searchString.toLowerCase()))
 
   const addNote = (event) => {   
     event.preventDefault()
@@ -33,6 +49,8 @@ function App() {
   return (  
       <div>
         <h2>Phonebook</h2>
+        <div>filter shown with <input onChange={handleFilterChange} /></div>
+        <h2>add a new</h2>
         <form onSubmit={addNote}>
           <div>
             name: <input value={newName} onChange={handleNameChange} />
@@ -47,7 +65,7 @@ function App() {
         <h2>Numbers</h2>
        
        <ul>
-        {persons.map(person => <li key={person.name}>{person.name} {person.number}</li>)}
+        {personsToShow.map(person => <li key={person.name}>{person.name} {person.number}</li>)}
        </ul>   
   
   
