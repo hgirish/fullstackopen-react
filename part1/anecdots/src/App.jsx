@@ -30,6 +30,7 @@ function App() {
   copyOfVotes[selected] = copyOfVotes[selected] + 1
   setVotes(copyOfVotes)
  }
+ 
   return (
    <div>
     <h1>Anectdote of the day</h1>
