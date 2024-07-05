@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const App = () => {
   const [notes, setNotes] = useState([])
-  const [newNote, setNewNote] = useState('a new note...')
+  const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
   const hook = () => {
@@ -27,10 +27,14 @@ const App = () => {
     const noteObject = {
       content: newNote,
       important: Math.random() < 0.5,
-      id: notes.length + 1,
     }
-    setNotes(notes.concat(noteObject))
-    setNewNote('')
+    axios
+    .post('http://localhost:3001/notes', noteObject)
+    .then(response => {
+      setNotes(notes.concat(response.data))
+      setNewNote('')
+    })
+
   }
 
   const handleNoteChange = (event) => {
@@ -54,7 +58,7 @@ const App = () => {
       </ul>
       <form onSubmit={addNote}>
         <input value={newNote}
-        onChange={handleNoteChange} />
+        onChange={handleNoteChange} placeholder='new note ...' />
         <button type="submit">save</button>
       </form>
     </div>
