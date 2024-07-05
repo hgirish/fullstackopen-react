@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import axios from 'axios'
+
+import personService from './services/persons'
 
 function App() {
   const [persons, setPersons] = useState([])
@@ -12,11 +13,10 @@ function App() {
 
   useEffect(() => {
     console.log('effect')
-    axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
+    personService.getAll()
+    .then(data => {
       console.log('promise fulfilled')
-      setPersons(response.data)
+      setPersons(data)
     })
   }, [])
 
@@ -55,6 +55,21 @@ function App() {
     setNewName('')
   }
 
+const handleDelete = (id, name) => {
+const confirmDelete = window.confirm(`Delete ${name}`)
+if (confirmDelete) {
+  personService.deletePerson(id)
+  .then(response => {
+    console.log(response)
+    setPersons(persons.filter(p => p.id !== id))
+  })  
+  .catch(error => {
+    alert(`the person '${name}' was already deleted from the server`)
+    setPersons(persons.filter(p => p.id !== id))
+  })
+}
+}
+
   return (  
       <div>
         <h2>Phonebook</h2>
@@ -67,7 +82,7 @@ function App() {
   
         <h2>Numbers</h2>
 
-        <Persons personsToShow={personsToShow} />
+        <Persons personsToShow={personsToShow} handleDelete={handleDelete} />
        
    
   
