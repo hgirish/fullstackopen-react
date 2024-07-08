@@ -23,47 +23,62 @@ function App() {
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
+
   }
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value)
+ 
   }
 
   const handleFilterChange= (event) => {
-   const newSearch = event.target.value;
-   
-
- 
+   const newSearch = event.target.value; 
     setSearchString(newSearch)
   }
   const personsToShow = searchString.length === 0 
   ? persons
   : persons.filter(x=> x.name.toLowerCase().includes(searchString.toLowerCase()))
 
-  const addNote = (event) => {   
+  const addPerson = (event) => {   
     event.preventDefault()
     if (newName && persons.findIndex(p =>p.name.toLowerCase() === newName.toLowerCase()) !== -1){
-      alert(`${newName} is already added to phonebook`)
+      const replaceNumber = confirm(`${newName} is already added to phonebook, replace the old number with new one?`)
+      if (replaceNumber) {
+        const existingPerson = persons.find(p=> p.name.toLowerCase() === newName.toLowerCase())
+        const changedPerson = {...existingPerson, number: newNumber}
+        personService.updatePerson(changedPerson)
+       
+        .then(returnedPerson => {        
+          setPersons(persons.map(p => p.id === returnedPerson.id  ? returnedPerson : p))
+          setNewName('')
+          setNewNumber('')
+        })
+      }
+
       return
     }
     const personObject = {
       name: newName,
       number: newNumber
     }
-    const newPersons = persons.concat(personObject)
-    setPersons(newPersons)
+    personService.addPerson(personObject)
+    .then(returnedPerson => {     
+      setPersons(persons.concat(returnedPerson))
+      setNewName('')
+      setNewNumber('')
+    })
     
-    setNewName('')
+    
+
   }
 
 const handleDelete = (id, name) => {
 const confirmDelete = window.confirm(`Delete ${name}`)
 if (confirmDelete) {
   personService.deletePerson(id)
-  .then(response => {
-    console.log(response)
+  .then(() => {    
     setPersons(persons.filter(p => p.id !== id))
   })  
-  .catch(error => {
+  .catch(() => {
     alert(`the person '${name}' was already deleted from the server`)
     setPersons(persons.filter(p => p.id !== id))
   })
@@ -78,7 +93,7 @@ if (confirmDelete) {
 
         <h2>add a new</h2>
 
-        <PersonForm addNote={addNote} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} />
+        <PersonForm newName={newName} newNumber={newNumber} addPerson={addPerson} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} />
   
         <h2>Numbers</h2>
 
