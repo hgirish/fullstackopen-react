@@ -40,7 +40,7 @@ const Country = ({country}) => {
         <p>Weather in {country?.captial}</p>
         <p>temperature {celsiusTemp} &deg;C  ({fahrenheitTemp} &deg;F)</p>
         <p><img src={iconUrl} alt={iconDescription} title={iconDescription} /></p>
-        
+      <p>wind {weather.wind.speed} m/s </p>
          </div>
     )
 }
