@@ -4,13 +4,15 @@ import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 function App() {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchString, setSearchString] = useState('')
-
+  const [message, setMessage] = useState('error occured!')
+  const [messageClassName, setMessageClassName] = useState('success')
   useEffect(() => {
     console.log('effect')
     personService.getAll()
@@ -52,6 +54,15 @@ function App() {
           setNewName('')
           setNewNumber('')
         })
+        .catch(() => {
+          setMessage(`the person '${newName}' has already been removed from the server`)
+          setMessageClassName('error')
+          setTimeout(()=>{
+            setMessage(null)
+            setMessageClassName('')
+          }, 5000)
+          
+        })
       }
 
       return
@@ -65,6 +76,13 @@ function App() {
       setPersons(persons.concat(returnedPerson))
       setNewName('')
       setNewNumber('')
+      setMessage(`Added '${returnedPerson.name}'`)
+      setMessageClassName('success')
+      setTimeout(()=>{
+      setMessage(null)
+      setMessageClassName('')
+     }, 5000)
+      
     })
     
     
@@ -79,7 +97,12 @@ if (confirmDelete) {
     setPersons(persons.filter(p => p.id !== id))
   })  
   .catch(() => {
-    alert(`the person '${name}' was already deleted from the server`)
+    setMessage(`the person '${name}' was already deleted from the server`)
+    setMessageClassName('error')
+    setTimeout(()=>{
+      setMessage(null)
+      setMessageClassName('')
+    }, 5000)
     setPersons(persons.filter(p => p.id !== id))
   })
 }
@@ -88,6 +111,7 @@ if (confirmDelete) {
   return (  
       <div>
         <h2>Phonebook</h2>
+        <Notification message={message} className={messageClassName} />
 
        <Filter handleFilterChange={handleFilterChange} />
 
