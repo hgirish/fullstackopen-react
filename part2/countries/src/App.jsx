@@ -33,7 +33,7 @@ function App() {
       setFilteredCountries([])
       return
     }
-   
+  
    let result = search.length > 0 ? countries.filter(c => c.name.common.trim().toLowerCase() === (searchTerm.trim())) : []
    if (result.length === 0){
     result = search.length > 0 ? countries.filter(c => c.name.common.trim().toLowerCase().includes(searchTerm.trim())) : []
@@ -64,13 +64,18 @@ function App() {
 
    
   }
- 
+  const handleShowClick = (name) => {
+    console.log('handleShowclick name: ', name)
+    const country = countries.filter(c=> c.name.common === name)[0]
+    setCountry(country)
+   }
+
   return (
     <div>
       <h2>Countries</h2>
       <Search searchTerm={search} handleSearchClick={handleSearchClick} message={message} />
 
-    <CountryList filteredCounties={filteredCounties} /> 
+    <CountryList filteredCounties={filteredCounties} handleShowClick={handleShowClick} /> 
     
     <Country country={country} />
     </div>
