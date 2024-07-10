@@ -38,7 +38,7 @@ function App() {
    if (result.length === 0){
     result = search.length > 0 ? countries.filter(c => c.name.common.trim().toLowerCase().includes(searchTerm.trim())) : []
    }
-    console.log('result length', result.length)
+ 
 
 
     if (result.length === 1){
