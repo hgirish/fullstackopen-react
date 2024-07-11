@@ -7,7 +7,7 @@ import personService from './services/persons'
 import Notification from './components/Notification'
 
 function App() {
-  const [persons, setPersons] = useState(null)
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchString, setSearchString] = useState('')
