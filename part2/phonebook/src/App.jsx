@@ -11,7 +11,7 @@ function App() {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchString, setSearchString] = useState('')
-  const [message, setMessage] = useState('error occured!')
+  const [message, setMessage] = useState(null)
   const [messageClassName, setMessageClassName] = useState('success')
   useEffect(() => {
     console.log('effect')
