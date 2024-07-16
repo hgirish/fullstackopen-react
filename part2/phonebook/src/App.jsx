@@ -84,6 +84,16 @@ function App() {
      }, 5000)
       
     })
+    .catch(error => {
+      const errorMessage = error.response.data.error
+      console.log(errorMessage)
+      setMessage(errorMessage)
+    setMessageClassName('error')
+    setTimeout(()=>{
+      setMessage(null)
+      setMessageClassName('')
+    }, 5000)
+    })
     
     
 
