@@ -61,6 +61,9 @@ noteService
   return (
     <div>
       <h1>Notes</h1>
+      <div>
+        <button onClick={()=> setShowAll(!showAll)}>show {showAll ? 'important' : 'all'}</button>
+      </div>
       <h2>Add new note</h2>
       <form>
         <input value={newNote} onChange={handleNewNoteChange} />
