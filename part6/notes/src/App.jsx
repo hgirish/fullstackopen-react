@@ -18,13 +18,7 @@ const toggleImportance = (id) => {
   return (
       <div>
           <NewNote />
-          <ul>
-              {notes.map(note => 
-                  <li key={note.id} onClick={()=> toggleImportance(note.id)} >
-                      {note.content} <strong>{note.important ? 'important' : ''}</strong>
-                  </li>
-              )}
-          </ul>
+       
       </div>
   )
 }
