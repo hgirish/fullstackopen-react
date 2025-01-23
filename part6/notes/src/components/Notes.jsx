@@ -4,11 +4,19 @@ import { toggleImportanceOf } from "../reducers/note-reducer";
 
 const Notes = () => {
     const dispatch = useDispatch();
-    const notes = useSelector(state => state);
-
+    const filteredNotes = useSelector(state => {
+        console.log('state.filter', state.filter)
+        if ( state.filter === 'ALL' ) {
+          return state.notes
+        }
+        return state.filter  === 'IMPORTANT' 
+          ? state.notes.filter(note => note.important)
+          : state.notes.filter(note => !note.important)
+      })
+//console.log(filteredNotes);
     return (
         <ul>
-        {notes.map(note => 
+        {filteredNotes.map(note => 
           <Note 
           note={note} 
           key={note.id} 

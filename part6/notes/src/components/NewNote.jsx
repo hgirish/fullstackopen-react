@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux"
 import { createNote } from "../reducers/note-reducer"
 
+
 const NewNote = () => {
     const dispatch = useDispatch()
     const addNote = (event) => {
