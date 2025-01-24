@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import filterReducer from "./reducers/filterReducer";
+import filterReducer from "./reducers/filterSlice";
 import anecdoteReducer from "./reducers/anecdoteSlice";
 
 const store = configureStore({
