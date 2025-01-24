@@ -1,3 +1,5 @@
+
+
 const initialState = [
     {
         content: 'reducer defines how redux store works',
@@ -13,6 +15,8 @@ const initialState = [
   
 const generatedId = () => 
     Number((Math.random() * 1000000).toFixed(0))
+
+
 
 export const createNote = (content) => {
     return {
@@ -61,3 +65,4 @@ const noteReducer = (state = initialState, action) => {
 
 
 export default noteReducer
+
