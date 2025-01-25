@@ -4,8 +4,10 @@ const Note = ({note, handleClick}) => {
     
     
     return (
-        <li key={note.id} onClick={handleClick} >
+        <li  onClick={handleClick} >
+
         {note.content} <strong>{note.important ? 'important' : ''}</strong>
+        
     </li>
     );
 }
