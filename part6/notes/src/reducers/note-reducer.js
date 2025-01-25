@@ -1,4 +1,5 @@
 
+import noteService from '../services/notes'
 
 const initialState = [
     {
@@ -52,6 +53,8 @@ const noteReducer = (state = initialState, action) => {
                     ...noteToChange,
                     important: !noteToChange.important
                 };
+                noteService.update(id, changedNote)
+                
                 return state.map(note => note.id !== id ? note : changedNote)
             }
         default: 
