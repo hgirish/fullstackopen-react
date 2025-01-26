@@ -22,7 +22,8 @@ const queryClient =  useQueryClient()
   const result = useQuery({
     queryKey: ['anecdotes'],
     queryFn: getAnecdotes,
-    retry: 1 // retry once if the request fails, other option is false
+    retry: 1, // retry once if the request fails, other option is false,
+refetchOnWindowFocus: false,
   })
 
   console.log(JSON.parse(JSON.stringify(result)));
