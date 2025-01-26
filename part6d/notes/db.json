@@ -12,7 +12,7 @@
     },
     {
       "content": "state is stored in the backend",
-      "important": false,
+      "important": true,
       "id": "3"
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "content": "asas",
-      "important": true,
+      "important": false,
       "id": "6"
     },
     {
@@ -39,6 +39,11 @@
       "id": "604d",
       "content": "New note is piece of cake",
       "important": false
+    },
+    {
+      "id": "f4d5",
+      "content": "react-query is easy to use",
+      "important": true
     }
   ]
 }
