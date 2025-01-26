@@ -6,7 +6,7 @@ const AnecdoteList = () => {
     const dispatch = useDispatch()
 
     const anecdotes = useSelector(({anecdotes, filter}) => {
-      console.log('anecdotes', anecdotes)
+      
       let anecdotesFromState = anecdotes
       if (filter) {
         anecdotesFromState = 
@@ -30,10 +30,8 @@ const AnecdoteList = () => {
         await anecdoteService.update(updatedAnecdote.id, updatedAnecdote)
 
         dispatch(voteAnecdote(returnedObeject))
-        dispatch(setNotification(`you voted '${anecdotes.find(a => a.id === returnedObeject.id).content}'`))
-        setTimeout(() => {
-          dispatch(removeNotification())
-        }, 5000)
+        dispatch(setNotification(`you voted '${anecdote.content}'`,5))
+       
       }
     
     return (
