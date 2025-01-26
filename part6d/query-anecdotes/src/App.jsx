@@ -2,6 +2,7 @@ import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
+import { getAnecdotes } from './requests'
 
 const App = () => {
 
@@ -11,7 +12,8 @@ const App = () => {
 
   const result = useQuery({
     queryKey: ['anecdotes'],
-    queryFn: () => axios.get('http://localhost:3001/anecdotes').then(response => response.data),
+    queryFn: getAnecdotes,
+    retry: 1 // retry once if the request fails, other option is false
   })
 
   console.log(JSON.parse(JSON.stringify(result)));
