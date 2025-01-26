@@ -7,8 +7,20 @@ export const getAnecdotes = () =>
     .then(response => response.data);
 
 export const createAnecdote = (anecdote) => 
-    axios.post(baseUrl, anecdote)
-    .then(response => response.data);
+    {
+        if (anecdote.content === '') {
+            return new Promise((resolve, reject) => {
+                reject(new Error('Anecdote content cannot be empty'));
+            });
+        }
+        if (anecdote.content.length < 5) {
+            return new Promise((resolve, reject) => {
+                reject(new Error('Anecdote must be at least 5 characters long'));
+            });
+        }
+        return axios.post(baseUrl, anecdote)
+            .then(response => response.data);
+    };
 
 export const updateAnecdote = (anecdote) => 
     axios.put(`${baseUrl}/${anecdote.id}`, anecdote)
