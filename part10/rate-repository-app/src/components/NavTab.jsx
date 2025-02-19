@@ -1,14 +1,44 @@
-import { Text, View } from "react-native"
+import { Text, View, StyleSheet } from "react-native"
 import AppBar from "./AppBar"
-import {  Link} from "react-router-native";
-
+import Constants from 'expo-constants';
+import theme
+ from '../theme';
+ import { Link, useLocation} from "react-router-native";
+const styles = StyleSheet.create({
+    container: {
+        paddingTop: Constants.statusBarHeight,
+        marginHorizontal: 16,
+        backgroundColor: theme.colors.appBarBackground,
+        display:'flex',
+        flexDirection: 'row',
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 700,
+        color: theme.colors.appBarText,
+        padding: 5,
+    },
+    activeLink: {
+        color: theme.colors.textActiveLink,
+    },
+    inactiveLink: {
+        color: theme.colors.textInactiveLink,
+    },
+});
 const NavTab = () => {
+
+        const location = useLocation();
+        const isActive = location.pathname === "/";
+        const linkStyle = isActive ? styles.activeLink : styles.inactiveLink;
+        const signInLinkStyle =  !isActive ? styles.activeLink : styles.inactiveLink;
+    
+    
     return (
         <>
- <View>
-         <AppBar />
+ <View style={styles.container}>
+         <AppBar linkStyle={linkStyle}/>
            <Link to="/signin">
-                 <Text>Sign In</Text>
+                 <Text style={[styles.title, signInLinkStyle]}>Sign In</Text>
                  </Link>
        </View>
         </>

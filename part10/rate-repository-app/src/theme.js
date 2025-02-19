@@ -7,6 +7,8 @@ const theme = {
         appBarText: 'white',
         main: '#e1e4e8',
         repoItem: 'white',
+        textActiveLink: 'yellow',
+        textInactiveLink: 'lightgray',
     },
     fontSizes: {
       body: 14,
