@@ -1,12 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import {  StyleSheet, View, Text } from "react-native";
 import RepositoryList from "./RepositoryList";
 import AppBar from "./AppBar";
+import theme from "../theme";
+import { Navigate, Route, Routes , Link} from "react-router-native";
+import SignIn from "./SignIn";
+import NavTab from "./NavTab";
 
 const styles = StyleSheet.create({
     container: {
        
         flexGrow: 1,
         flexShrink: 1,
+        backgroundColor: theme.colors.main,
     },
     title: {
         fontSize: 24,
@@ -16,8 +21,16 @@ const styles = StyleSheet.create({
 const Main = () => {
     return (
         <View style={styles.container}>
-         <AppBar />
-            <RepositoryList />
+         <NavTab />
+       <View>
+       
+       </View>
+         <Routes>
+            <Route path="/" element={<RepositoryList />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+         </Routes>
+           
         </View>
     )
 }
