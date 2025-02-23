@@ -1,10 +1,11 @@
 import {  StyleSheet, View, Text } from "react-native";
 import RepositoryList from "./RepositoryList";
-import AppBar from "./AppBar";
 import theme from "../theme";
-import { Navigate, Route, Routes , Link} from "react-router-native";
+import { Navigate, Route, Routes} from "react-router-native";
 import SignIn from "./SignIn";
 import NavTab from "./NavTab";
+import BodyMassIndexCalculator from "./samples/BodyMassIndexCalculator";
+import WhatIsMyPlatform from "./samples/WhatIsMyPlatform";
 
 const styles = StyleSheet.create({
     container: {
@@ -15,6 +16,9 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
+    },
+    font: {
+        fontFamily: theme.fonts.main,
     },
 });
 
@@ -28,6 +32,9 @@ const Main = () => {
          <Routes>
             <Route path="/" element={<RepositoryList />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/bmi" element={<BodyMassIndexCalculator />} />
+            <Route path="/sample" element={<Text>Sample</Text>} />
+            <Route path="/platform" element={<WhatIsMyPlatform />} />
             <Route path="*" element={<Navigate to="/" replace />} />
          </Routes>
            

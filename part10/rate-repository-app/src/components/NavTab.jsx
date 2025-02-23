@@ -41,7 +41,12 @@ const NavTab = () => {
            <Link to="/signin">
                  <Text style={[styles.title, signInLinkStyle]}>Sign In</Text>
                  </Link>
-              
+              <Link to="/bmi">
+                 <Text style={[styles.title, signInLinkStyle]}>BMI</Text>
+                 </Link>
+                    <Link to="/platform">
+                    <Text style={[styles.title, signInLinkStyle]}>Platform</Text>
+                    </Link>
     </ScrollView>
         
        </View>
