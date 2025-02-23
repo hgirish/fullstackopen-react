@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from "react-native"
+import { Text, View, StyleSheet, ScrollView } from "react-native"
 import AppBar from "./AppBar"
 import Constants from 'expo-constants';
 import theme
@@ -36,10 +36,14 @@ const NavTab = () => {
     return (
         <>
  <View style={styles.container}>
-         <AppBar linkStyle={linkStyle}/>
+    <ScrollView horizontal>
+    <AppBar linkStyle={linkStyle}/>
            <Link to="/signin">
                  <Text style={[styles.title, signInLinkStyle]}>Sign In</Text>
                  </Link>
+              
+    </ScrollView>
+        
        </View>
         </>
     )

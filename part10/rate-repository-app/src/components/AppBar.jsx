@@ -15,13 +15,14 @@ const styles = StyleSheet.create({
 
 const AppBar = ({linkStyle}) => {
 
-    return <View >
+    return( <View >
         <Link to="/">
        
         <Text style={[styles.title, linkStyle]}>Repositories</Text>
        
         </Link>
-    </View>;
+    </View>
+    );
     
 }
 
